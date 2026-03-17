@@ -20,7 +20,8 @@ class AudioPlayer:
             return
             
         for file in sorted(os.listdir(self.music_dir)):
-            if file.lower().endswith('.mp3'):
+            lower = file.lower()
+            if lower.endswith(".mp3") or lower.endswith(".mp3.mpeg") or lower.endswith(".mpeg"):
                 self.songs.append(file)
                 
     def get_songs(self):

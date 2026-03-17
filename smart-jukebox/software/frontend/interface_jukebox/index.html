@@ -52,7 +52,30 @@
           <button id="btnBack" class="btn ghost">Voltar</button>
         </div>
       </section>
+
+      <section class="playback">
+        <div class="playback-info">
+          <span class="nav-label">Fila</span>
+          <div id="queueCount" class="nav-value">0 músicas</div>
+        </div>
+        <div id="queueMessage" class="queue-message hidden">Adicionado à fila.</div>
+        <div class="playback-controls">
+          <button id="btnPlayQueue" class="btn primary">Tocar Fila</button>
+          <button id="btnPause" class="btn">Pausar</button>
+          <button id="btnResume" class="btn">Continuar</button>
+          <button id="btnPrev" class="btn">Anterior</button>
+          <button id="btnNext" class="btn">Próxima</button>
+        </div>
+      </section>
+
+      <section class="queue">
+        <h2>Próximas</h2>
+        <ul id="queueList" class="menu-list"></ul>
+      </section>
+
     </main>
+
+    <div id="toast" class="toast hidden">Adicionado à fila.</div>
 
     <script src="app.js"></script>
   </body>
