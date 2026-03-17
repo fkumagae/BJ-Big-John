@@ -1,17 +1,33 @@
 {
-  "generated_at": "2026-03-17T18:46:42.610461Z",
+  "generated_at": "2026-03-17T20:14:54.631095Z",
   "items": [
     {
       "title": "Big Bad John",
       "artist": "Geoff Castellucci",
       "genre": "genero1",
-      "filename": "genero1-Geoff Castellucci-Big Bad John.mp3.mpeg"
+      "filename": "genero1-Geoff Castellucci-Big Bad John.mp3.mpeg",
+      "index": 0
     },
     {
       "title": "Never Gonna Give You Up",
       "artist": "Rick Astley",
       "genre": "genero1",
-      "filename": "genero1-Rick Astley-Never Gonna Give You Up.mp3"
+      "filename": "genero1-Rick Astley-Never Gonna Give You Up.mp3",
+      "index": 1
+    },
+    {
+      "index": 2,
+      "title": "Água (Versão Estendida)",
+      "artist": "BaianaSystem",
+      "genre": "genero2",
+      "filename": "genero2-BaianaSystem-Água (Versão Estendida).mp3"
+    },
+    {
+      "index": 3,
+      "title": "Como Tudo Deve Ser",
+      "artist": "Charlie Brown Jr.",
+      "genre": "genero2",
+      "filename": "genero2-Charlie Brown Jr.-Como Tudo Deve Ser.mp3"
     }
   ]
 }

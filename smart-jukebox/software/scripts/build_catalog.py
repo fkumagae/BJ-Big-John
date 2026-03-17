@@ -87,20 +87,27 @@ def build_catalog():
     existing_by_filename = {item.get("filename"): item for item in existing if item.get("filename")}
     found_any = False
 
+    files = []
     for filename in sorted(os.listdir(MUSIC_DIR)):
         lower = filename.lower()
         if not (lower.endswith(".mp3") or lower.endswith(".mp3.mpeg") or lower.endswith(".mpeg")):
             continue
+        files.append(filename)
+
+    for index, filename in enumerate(files):
         found_any = True
         path = os.path.join(MUSIC_DIR, filename)
         tags = read_tags(path)
         title, artist, genre = parse_filename(filename)
         if filename in existing_by_filename:
-            items.append(existing_by_filename[filename])
+            item = dict(existing_by_filename[filename])
+            item["index"] = index
+            items.append(item)
             continue
 
         items.append(
             {
+                "index": index,
                 "title": (tags.get("title") if tags else None) or title,
                 "artist": (tags.get("artist") if tags else None) or artist,
                 "genre": (tags.get("genre") if tags else None) or genre,

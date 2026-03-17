@@ -1,4 +1,6 @@
 import os
+import sys
+import subprocess
 from flask import Flask, jsonify
 from flask_cors import CORS
 from player import AudioPlayer
@@ -13,6 +15,8 @@ CORS(app)
 # Navegação: api -> backend -> software -> smart-jukebox -> audio -> music
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MUSIC_DIR = os.path.abspath(os.path.join(BASE_DIR, '../../../audio/music/'))
+ROOT_DIR = os.path.abspath(os.path.join(BASE_DIR, '../../..'))
+CATALOG_SCRIPT = os.path.join(ROOT_DIR, 'software', 'scripts', 'build_catalog.py')
 
 # Instancia o player na inicialização do servidor
 player = AudioPlayer(music_dir=MUSIC_DIR)
@@ -51,6 +55,25 @@ def next_song():
 def prev_song():
     player.prev()
     return jsonify({"status": "ok"}), 200
+
+@app.route('/rescan', methods=['POST'])
+def rescan():
+    if not os.path.isfile(CATALOG_SCRIPT):
+        return jsonify({"error": "Script de catalogo nao encontrado"}), 500
+    try:
+        result = subprocess.run(
+            [sys.executable, CATALOG_SCRIPT],
+            cwd=ROOT_DIR,
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        # Atualiza lista de musicas do player
+        player.songs = []
+        player._load_songs()
+        return jsonify({"status": "ok", "output": result.stdout.strip()}), 200
+    except subprocess.CalledProcessError as e:
+        return jsonify({"error": "Falha ao gerar catalogo", "output": e.stderr}), 500
 
 if __name__ == '__main__':
     # host='0.0.0.0' permite que a API seja acessada de outros dispositivos na mesma rede, 
