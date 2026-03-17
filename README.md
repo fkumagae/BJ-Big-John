@@ -87,25 +87,59 @@ Inclui:
 ---
 
 # 📁 Estrutura do Repositório
+```text
 smart-jukebox
 │
 ├── docs
+│ ├── visao-geral.md
+│ ├── arquitetura.md
+│ ├── roadmap.md
+│ └── reunioes
 │
 ├── hardware
+│ ├── esquematicos
+│ ├── pcb
+│ ├── simulacoes
+│ └── lista_componentes
+│ └── BOM.md
 │
 ├── firmware
+│ ├── esp32
+│ │ ├── jukebox_controller
+│ │ └── audio_control
+│ └── testes
 │
 ├── software
+│ ├── backend
+│ │ ├── api
+│ │ └── database
+│ ├── frontend
+│ │ ├── interface_jukebox
+│ │ └── painel_admin
+│ └── scripts
 │
 ├── audio
+│ ├── samples
+│ ├── efeitos
+│ └── playlists
 │
 ├── design
+│ ├── interface
+│ ├── mockups
+│ └── caixa_fisica
 │
 ├── testes
+│ ├── hardware
+│ ├── software
+│ └── integracao
 │
-└── logs
-
-
+├── logs
+│ └── desenvolvimento
+│
+├── README.md
+├── LICENSE
+└── .gitignore
+``` 
 ### docs
 Documentação técnica e planejamento.
 
@@ -313,12 +347,13 @@ Sugestão inicial de divisão:
 ---
 
 # 🔢 Versionamento
+```text
 v0.1 protótipo de áudio
 v0.2 controle de reprodução
 v0.3 interface básica
 v0.4 sistema de playlists
 v1.0 jukebox funcional
-
+```
 
 ---
 
