@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Smart Jukebox</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="header">
+        <div class="brand">
+          <div class="logo">SJ</div>
+          <div>
+            <h1>Smart Jukebox</h1>
+            <p class="subtitle">Reprodução local · MVP</p>
+          </div>
+        </div>
+        <div class="status">
+          <span class="status-label">Agora tocando</span>
+          <div id="nowPlaying" class="now-playing">—</div>
+        </div>
+      </header>
+
+      <section class="menu">
+        <div class="menu-column" data-column="genre">
+          <div class="menu-title">
+            <h2>Gênero</h2>
+            <button id="btnReload" class="btn ghost">Recarregar</button>
+          </div>
+          <ul id="genreList" class="menu-list"></ul>
+        </div>
+        <div class="menu-column" data-column="artist">
+          <h2>Artista</h2>
+          <ul id="artistList" class="menu-list"></ul>
+        </div>
+        <div class="menu-column" data-column="song">
+          <h2>Música</h2>
+          <ul id="songList" class="menu-list"></ul>
+        </div>
+      </section>
+
+      <section class="nav">
+        <div class="nav-display">
+          <span class="nav-label">Selecionado</span>
+          <div id="selectedPath" class="nav-value">—</div>
+        </div>
+        <div class="nav-controls">
+          <button id="btnUp" class="btn">Subir</button>
+          <button id="btnDown" class="btn">Descer</button>
+          <button id="btnEnter" class="btn primary">Selecionar</button>
+          <button id="btnBack" class="btn ghost">Voltar</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
