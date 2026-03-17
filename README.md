@@ -1,4 +1,4 @@
-# 🎵 Smart Jukebox
+# 🎵 Smart Big John - BJ
 
 Projeto de desenvolvimento de uma **caixa de som inteligente estilo Jukebox**, capaz de reproduzir músicas sob demanda, gerenciar playlists e oferecer uma interface interativa para seleção de faixas.
 
