@@ -8,8 +8,8 @@ O objetivo do projeto é desenvolver um sistema completo envolvendo **hardware, 
 
 # 👥 Equipe
 
-- Felipe Kumagae  
-- Xota  
+- Felipe Pellegrini Kumagae  
+- João Paulo Souza da Silva
 
 ---
 
