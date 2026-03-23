@@ -51,5 +51,19 @@ if (-not $installedAny) {
     python -m pip install flask flask-cors pygame mutagen
 }
 
-Write-Host '[4/4] Iniciando API'
-python (Join-Path $RootDir 'software\backend\api\app.py')
+Write-Host '[4/5] Iniciando API'
+$apiJob = Start-Job -ScriptBlock {
+    param($RootDir)
+    python (Join-Path $RootDir 'software\backend\api\app.py')
+} -ArgumentList $RootDir
+
+Write-Host '[5/5] Iniciando Frontend (http.server)'
+$frontendJob = Start-Job -ScriptBlock {
+    param($RootDir)
+    Set-Location $RootDir
+    python -m http.server 8000
+} -ArgumentList $RootDir
+
+Write-Host 'Backend: http://localhost:5000'
+Write-Host 'Frontend: http://localhost:8000/software/frontend/interface_jukebox/'
+Write-Host 'Para encerrar, use: Get-Job | Stop-Job'

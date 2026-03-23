@@ -80,5 +80,17 @@ if [ "$installed_any" = false ]; then
   python -m pip install flask flask-cors pygame mutagen
 fi
 
-echo "[4/4] Iniciando API"
-exec python software/backend/api/app.py
+echo "[4/5] Iniciando API"
+python software/backend/api/app.py &
+API_PID=$!
+
+echo "[5/5] Iniciando Frontend (http.server)"
+python -m http.server 8000 &
+FRONT_PID=$!
+
+echo "Backend: http://localhost:5000"
+echo "Frontend: http://localhost:8000/software/frontend/interface_jukebox/"
+echo "Para encerrar: Ctrl+C"
+
+trap 'kill $API_PID $FRONT_PID' INT TERM
+wait $API_PID $FRONT_PID
