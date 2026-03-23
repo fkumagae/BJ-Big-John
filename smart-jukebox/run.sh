@@ -27,7 +27,7 @@ pick_python() {
 }
 
 if ! pick_python; then
-  echo "Erro: Python não encontrado no PATH."
+  echo "Erro: Python nao encontrado no PATH."
   echo "Dica (Windows): rode ./run.ps1 no PowerShell."
   exit 1
 fi
@@ -37,7 +37,7 @@ if [ ! -d "$VENV_DIR" ]; then
   echo "[1/4] Criando ambiente virtual em $VENV_DIR"
   "$PYTHON_CMD" -m venv "$VENV_DIR"
 else
-  echo "[1/4] Ambiente virtual já existe em $VENV_DIR"
+  echo "[1/4] Ambiente virtual ja existe em $VENV_DIR"
 fi
 
 if [ -f "$VENV_DIR/bin/activate" ]; then
@@ -49,7 +49,7 @@ elif [ -f "$VENV_DIR/Scripts/activate" ]; then
   # shellcheck disable=SC1091
   source "$VENV_DIR/Scripts/activate"
 else
-  echo "Erro: script de ativação do venv não encontrado."
+  echo "Erro: script de ativacao do venv nao encontrado."
   exit 1
 fi
 
@@ -59,14 +59,14 @@ python -m pip install --upgrade pip
 install_if_not_empty() {
   local req_file="$1"
   if [ -f "$req_file" ] && grep -Eq '^[[:space:]]*[^#[:space:]]' "$req_file"; then
-    echo "Instalando dependências de $req_file"
+    echo "Instalando dependencias de $req_file"
     python -m pip install -r "$req_file"
     return 0
   fi
   return 1
 }
 
-echo "[3/4] Instalando dependências"
+echo "[3/4] Instalando dependencias"
 installed_any=false
 if install_if_not_empty "software/backend/api/requirements.txt"; then
   installed_any=true
@@ -76,15 +76,35 @@ if install_if_not_empty "software/scripts/requirements.txt"; then
 fi
 
 if [ "$installed_any" = false ]; then
-  echo "Nenhum requirements preenchido. Instalando dependências padrão."
-  python -m pip install flask flask-cors pygame mutagen
+  echo "Nenhum requirements preenchido. Instalando dependencias padrao."
+  python -m pip install flask flask-cors mutagen
 fi
 
-echo "[4/5] Iniciando API"
+ensure_mpg123() {
+  if command -v mpg123 >/dev/null 2>&1; then
+    return 0
+  fi
+
+  if command -v apt-get >/dev/null 2>&1; then
+    echo "mpg123 nao encontrado. Instalando via apt-get..."
+    sudo apt-get update
+    sudo apt-get install -y mpg123
+    return 0
+  fi
+
+  echo "Erro: mpg123 nao encontrado no PATH."
+  echo "Instale mpg123 e tente novamente."
+  return 1
+}
+
+echo "[4/5] Verificando mpg123"
+ensure_mpg123
+
+echo "[5/6] Iniciando API"
 python software/backend/api/app.py &
 API_PID=$!
 
-echo "[5/5] Iniciando Frontend (http.server)"
+echo "[6/6] Iniciando Frontend (http.server)"
 python -m http.server 8000 &
 FRONT_PID=$!
 
